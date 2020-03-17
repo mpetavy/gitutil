@@ -5,6 +5,7 @@ import (
 	"flag"
 	"fmt"
 	"github.com/mpetavy/common"
+	"os"
 	"os/exec"
 	"strings"
 	"time"
@@ -12,18 +13,19 @@ import (
 
 var (
 	committed *bool
+	rmdir     *string
 )
-
 
 func init() {
 	common.Init("1.0.0", "2020", "Utility for simple GIT interaction", "mpetavy", fmt.Sprintf("https://github.com/mpetavy/%s", common.Title()), common.APACHE, true, nil, nil, run, 0)
 
-	committed = flag.Bool("committed",false,"check if current directory containes uncommitted changes")
+	committed = flag.Bool("committed", false, "check if current directory containes uncommitted changes")
+	rmdir = flag.String("rmdir", "", "remove directory")
 }
 
 func run() error {
 	if *committed {
-		cmd := exec.Command("git","diff")
+		cmd := exec.Command("git", "diff")
 
 		var stdout bytes.Buffer
 		var stderr bytes.Buffer
@@ -47,6 +49,10 @@ func run() error {
 		}
 
 		return nil
+	}
+
+	if *rmdir != "" {
+		return os.RemoveAll(*rmdir)
 	}
 
 	return nil
