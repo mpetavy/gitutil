@@ -4,11 +4,12 @@ import (
 	"bytes"
 	"flag"
 	"fmt"
-	"github.com/mpetavy/common"
 	"os"
 	"os/exec"
 	"strings"
 	"time"
+
+	"github.com/mpetavy/common"
 )
 
 var (
@@ -33,7 +34,7 @@ func run() error {
 		cmd.Stdout = &stdout
 		cmd.Stderr = &stderr
 
-		err := common.Watchdog(cmd, time.Millisecond*time.Duration(time.Second))
+		err := common.WatchdogCmd(cmd, time.Millisecond*time.Duration(time.Second))
 		if common.Error(err) {
 			return err
 		}
