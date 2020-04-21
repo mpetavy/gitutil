@@ -18,7 +18,7 @@ var (
 )
 
 func init() {
-	common.Init("1.0.0", "2020", "Utility for simple GIT interaction", "mpetavy", fmt.Sprintf("https://github.com/mpetavy/%s", common.Title()), common.APACHE, true, nil, nil, run, 0)
+	common.Init("1.0.0", "2020", "Utility for simple GIT interaction", "mpetavy", fmt.Sprintf("https://github.com/mpetavy/%s", common.Title()), common.APACHE, nil, nil, run, 0)
 
 	committed = flag.Bool("committed", false, "check if current directory containes uncommitted changes")
 	rmdir = flag.String("rmdir", "", "remove directory")
